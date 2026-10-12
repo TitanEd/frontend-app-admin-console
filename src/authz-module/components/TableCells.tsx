@@ -16,6 +16,7 @@ import {
 import {
   Icon, IconButton, OverlayTrigger, Tooltip, DataTableContext,
 } from '@openedx/paragon';
+import { translateConstant } from '../customI18n';
 import { RESOURCE_ICONS } from './constants';
 import messages from './messages';
 import ViewMoreLink from './ViewMoreLink';
@@ -164,7 +165,7 @@ const RoleCell = ({ value, cell }: ExtendedCellProps) => {
   const { key, ...cellProps } = cell.getCellProps({ 'data-role': MAP_ROLE_KEY_TO_LABEL[value] || '' });
   return (
     <span key={key} {...cellProps}>
-      {MAP_ROLE_KEY_TO_LABEL[value] || ''}
+      {translateConstant(MAP_ROLE_KEY_TO_LABEL[value] || '')}
     </span>
   );
 };
@@ -227,7 +228,7 @@ const ActionsCell = ({
     const roleToDelete = {
       role,
       scope: row.original.scope,
-      name: MAP_ROLE_KEY_TO_LABEL[role] || '',
+      name: translateConstant(MAP_ROLE_KEY_TO_LABEL[role] || ''),
     } as RoleToDelete;
     onClickDeleteButton(roleToDelete);
   };

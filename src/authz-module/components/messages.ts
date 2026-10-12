@@ -177,10 +177,40 @@ const messages = defineMessages({
     defaultMessage: 'View all permissions',
     description: 'Text for the link to view all permissions in the user table',
   },
+  'authz.breadcrumb.ariaLabel': {
+    id: 'authz.breadcrumb.ariaLabel',
+    defaultMessage: 'Breadcrumb',
+    description: 'Accessible name of the breadcrumb navigation above the page title',
+  },
   'authz.table.footer.pagination.label': {
     id: 'authz.table.footer.pagination.label',
     defaultMessage: 'Table pagination',
     description: 'Label for the table pagination controls',
+  },
+  'authz.table.footer.pagination.previous': {
+    id: 'authz.table.footer.pagination.previous',
+    defaultMessage: 'Previous',
+    description: 'Label of the button that opens the previous page of a table',
+  },
+  'authz.table.footer.pagination.next': {
+    id: 'authz.table.footer.pagination.next',
+    defaultMessage: 'Next',
+    description: 'Label of the button that opens the next page of a table',
+  },
+  'authz.table.footer.pagination.page': {
+    id: 'authz.table.footer.pagination.page',
+    defaultMessage: 'Page',
+    description: 'Word before a page number, as in "Page 2"',
+  },
+  'authz.table.footer.pagination.currentPage': {
+    id: 'authz.table.footer.pagination.currentPage',
+    defaultMessage: 'Current Page',
+    description: 'Screen reader text that marks the page being shown, as in "Page 2, Current Page, of 5"',
+  },
+  'authz.table.footer.pagination.pageOfCount': {
+    id: 'authz.table.footer.pagination.pageOfCount',
+    defaultMessage: 'of',
+    description: 'Word between the current page and the number of pages, as in "2 of 5"',
   },
 });
 

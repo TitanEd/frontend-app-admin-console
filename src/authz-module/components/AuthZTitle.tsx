@@ -2,12 +2,14 @@ import {
   ComponentType, isValidElement, ReactNode, Fragment,
 } from 'react';
 import { Link } from 'react-router-dom';
+import { useIntl } from '@edx/frontend-platform/i18n';
 import {
   Breadcrumb, Col, Container, Row, Button,
   Stack,
   useMediaQuery,
   breakpoints,
 } from '@openedx/paragon';
+import messages from './messages';
 
 interface BreadcrumbLink {
   label: string;
@@ -41,12 +43,14 @@ const AuthZTitle = ({
   activeLabel, navLinks = [], pageTitle, pageSubtitle, actions = [],
 }: AuthZTitleProps) => {
   const isDesktop = useMediaQuery({ minWidth: breakpoints.large.minWidth });
+  const { formatMessage } = useIntl();
   return (
     <Container className="p-5 bg-light-100">
       <Breadcrumb
         linkAs={Link}
         links={navLinks}
         activeLabel={activeLabel}
+        ariaLabel={formatMessage(messages['authz.breadcrumb.ariaLabel'])}
       />
       <Row className="mt-4">
         <Col xs={12} md={7} className="mb-4">

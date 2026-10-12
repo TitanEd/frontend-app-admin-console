@@ -2,11 +2,13 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { AppProvider, ErrorPage } from '@edx/frontend-platform/react';
 import {
   APP_INIT_ERROR, APP_READY, subscribe, initialize, mergeConfig,
 } from '@edx/frontend-platform';
 import AuthZModule from '@src/authz-module';
+import { localizeAuthzConstants } from '@src/authz-module/customI18n';
 
 import messages from './i18n';
 
@@ -15,6 +17,8 @@ import './index.scss';
 const queryClient = new QueryClient();
 
 subscribe(APP_READY, () => {
+  // Role and permission texts of the constants files, in the language of the page.
+  localizeAuthzConstants();
   const root = createRoot(document.getElementById('root') as HTMLElement);
 
   root.render(
@@ -22,7 +26,14 @@ subscribe(APP_READY, () => {
       <QueryClientProvider client={queryClient}>
         <AppProvider>
           <Routes>
-            <Route path="/authz/*" element={<AuthZModule />} />
+            <Route
+              path="/authz/*"
+              element={(
+                <PluginSlot id="app_layout_plugin_slot">
+                  <AuthZModule />
+                </PluginSlot>
+              )}
+            />
           </Routes>
         </AppProvider>
       </QueryClientProvider>

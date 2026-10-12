@@ -1,6 +1,7 @@
 import { IntlShape } from '@edx/frontend-platform/i18n';
 import { Language, LibraryBooks, School } from '@openedx/paragon/icons';
 import messages from './messages';
+import { translateConstant } from '../customI18n';
 
 export const getRolesFiltersOptions = (intl: IntlShape) => [
   {
@@ -75,7 +76,7 @@ export const getRolesFiltersOptions = (intl: IntlShape) => [
     value: 'library_user',
     contextType: 'library',
   },
-];
+].map((option) => ({ ...option, displayName: translateConstant(option.displayName) }));
 
 export const RESOURCE_ICONS = {
   COURSE: School,

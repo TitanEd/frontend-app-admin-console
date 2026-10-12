@@ -20,6 +20,13 @@ const Footer = () => {
         currentPage={pageIndex + 1}
         pageCount={pageCount}
         paginationLabel={formatMessage(messages['authz.table.footer.pagination.label'])}
+        buttonLabels={{
+          previous: formatMessage(messages['authz.table.footer.pagination.previous']),
+          next: formatMessage(messages['authz.table.footer.pagination.next']),
+          page: formatMessage(messages['authz.table.footer.pagination.page']),
+          currentPage: formatMessage(messages['authz.table.footer.pagination.currentPage']),
+          pageOfCount: formatMessage(messages['authz.table.footer.pagination.pageOfCount']),
+        }}
         onPageSelect={(pageNum) => gotoPage(pageNum - 1)}
       />
     </TableFooter>

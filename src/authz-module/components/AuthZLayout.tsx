@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { StudioHeader } from '@edx/frontend-component-header';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import AuthZTitle, { AuthZTitleProps } from './AuthZTitle';
 
 interface AuthZLayoutProps extends AuthZTitleProps {
@@ -13,12 +14,14 @@ interface AuthZLayoutProps extends AuthZTitleProps {
 
 const AuthZLayout = ({ children, context, ...props }: AuthZLayoutProps) => (
   <>
-    <StudioHeader
-      number={context?.id || null}
-      org={context?.org || null}
-      title={context?.title || null}
-      isHiddenMainMenu
-    />
+    <PluginSlot id="page_header_plugin_slot">
+      <StudioHeader
+        number={context?.id || null}
+        org={context?.org || null}
+        title={context?.title || null}
+        isHiddenMainMenu
+      />
+    </PluginSlot>
     <AuthZTitle {...props} />
     {children}
   </>

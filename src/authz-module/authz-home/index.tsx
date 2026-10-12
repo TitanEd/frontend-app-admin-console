@@ -33,6 +33,7 @@ const AuthzHome = () => {
         <Tabs
           variant="tabs"
           defaultActiveKey={hash ? 'permissionsRoles' : 'team'}
+          moreTabText={intl.formatMessage(messages['authz.tabs.more'])}
           className="bg-light-100 px-5"
         >
           <Tab eventKey="team" title={intl.formatMessage(messages['authz.tabs.team'])} className="p-5 bg-light-200">

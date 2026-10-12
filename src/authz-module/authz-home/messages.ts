@@ -21,6 +21,11 @@ const messages = defineMessages({
     defaultMessage: 'Roles and Permissions',
     description: 'AuthZ title for the roles tab',
   },
+  'authz.tabs.more': {
+    id: 'authz.tabs.more',
+    defaultMessage: 'More...',
+    description: 'Label of the menu that holds the tabs that do not fit in the tab bar',
+  },
 });
 
 export default messages;
