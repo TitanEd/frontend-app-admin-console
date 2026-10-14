@@ -41,5 +41,5 @@ pull_translations:
 	            translations/frontend-component-header/src/i18n/messages:frontend-component-header \
 	            translations/frontend-app-admin-console/src/i18n/messages:frontend-app-admin-console
 
-	$(intl_imports) frontend-platform paragon frontend-component-header frontend-component-footer frontend-app-admin-console
+	$(intl_imports) frontend-plugin-notifications frontend-platform paragon frontend-component-header frontend-component-footer frontend-app-admin-console
 
