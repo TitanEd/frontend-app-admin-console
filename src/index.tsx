@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import { AppProvider, ErrorPage } from '@edx/frontend-platform/react';
@@ -34,6 +34,8 @@ subscribe(APP_READY, () => {
                 </PluginSlot>
               )}
             />
+            {/* The console has no page of its own at its root: open the roles page. */}
+            <Route path="*" element={<Navigate to="/authz" replace />} />
           </Routes>
         </AppProvider>
       </QueryClientProvider>
