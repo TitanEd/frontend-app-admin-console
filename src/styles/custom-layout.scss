@@ -101,3 +101,87 @@ html .pgn__tabs .pgn__tab_invisible {
   right: auto;
   inset-inline-start: 0;
 }
+
+// TSD-137: top announcement banner (customHeaderExtras: .tels-announcements, first child of <body>,
+// outside #root). html/body don't scroll and the shell is 100vh tall, so the banners pushed the
+// bottom of the shell (the Next / Cancel buttons of Assign Role) below the window and it could not
+// be scrolled into view. While a banner is shown, body is one window tall and the shell takes the
+// room the banner leaves. The :has() chain reaches the shell at any wrapper depth below #root.
+body:has(> .tels-announcements) {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+body:has(> .tels-announcements) > .tels-announcements {
+  flex: 0 0 auto;
+}
+
+body:has(> .tels-announcements) > #root,
+body:has(> .tels-announcements) #root div:has(.app-container) {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+body:has(> .tels-announcements) .app-container {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+}
+
+// The scrolling page area and the left menu are sized as one window minus the header
+// (calc(100vh - ...)). With a banner above them they still ran past the bottom of the window,
+// so the last part of the page (Assign Role: Cancel / Next) could not be reached. While a banner
+// is shown they take the height the shell gives them instead, and scroll inside it.
+body:has(> .tels-announcements) .main-content,
+body:has(> .tels-announcements) .sidebar-container {
+  height: auto;
+  min-height: 0;
+}
+
+// TSD-135: TitanEd branding in the Roles and Permissions pages. The stock filter menus
+// (MultipleChoiceFilter: Organization / Role / Scope) print 'Showing X of Y' and the group names
+// (Libraries...) with Paragon's text-info-700, and the role cards print the object name with
+// text-info-400: Paragon's blue, not the TitanEd brand colour. Recoloured through the brand token,
+// so light and dark mode both follow the brand. Paragon's text-* utilities are !important.
+.tels-custom-admin-console {
+  .dropdown.filters .text-info-700,
+  .pgn__card .text-info-400 {
+    color: var(--pgn-color-primary-base) !important;
+  }
+
+  .dropdown.filters .pgn__dropdown-filter-group-name .pgn__icon {
+    color: var(--pgn-color-primary-base) !important;
+  }
+}
+
+// Radio buttons (Assign Role: role choice) were drawn as ovals: Paragon sizes them 1rem x 1rem,
+// but a min-width of 20px from another stylesheet stretched them sideways (20px x 16px).
+// Keep them square so the round border stays a circle, and stop flex from resizing them.
+.tels-custom-admin-console .pgn__form-radio-input {
+  width: 1rem !important;
+  height: 1rem !important;
+  min-width: 1rem !important;
+  min-height: 1rem !important;
+  flex: 0 0 1rem;
+}
+
+// TSD-136: the permission list of a role (user page, "View all permissions"; RenderPermissionInLine /
+// RenderPermissionColumn) prints each permission (View, Manage, Create, Edit, Delete, Publish, Reuse...)
+// in the brand link colour with a brand icon, so they looked like buttons that do something. They are
+// only information: neutral colour, neutral icon, normal cursor. The stock components use
+// text-primary (Paragon, !important, reads the token) and text-primary-400, so the tokens are set on the
+// item and the icon follows the item colour.
+.tels-custom-admin-console :is(div, li):has(> span.text-primary.small.font-weight-light) {
+  --pgn-color-primary-base: var(--pgn-color-gray-600);
+  --pgn-color-primary-400: var(--pgn-color-gray-600);
+  color: var(--pgn-color-gray-600) !important;
+  cursor: default;
+
+  .pgn__icon {
+    color: inherit !important;
+  }
+}
